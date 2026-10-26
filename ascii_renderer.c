@@ -28,7 +28,7 @@
 #define LIGHT_DECAY 0.5 // 0.5 - how fast the light decays with distance 
 
 
-#define WIDTH 45 // 45
+#define WIDTH 50 // 50
 #define HEIGHT 25 // 25
 
 /** Main program **/
@@ -163,10 +163,10 @@ void createTorusVerticesArray(struct vector3 verticesArray[]){
 	// defines a torus through parametrization. The step, large radius
 	// and small radius are hardcoded.
 	int counter = 0;
-	double step = 2*pi / 40;
+	double step = 2*pi / 60;
 	for (double theta = 0; theta < 2*pi; theta += step){
 		for (double phi = 0; phi < 2*pi; phi += step){
-			struct vector3 tempV = {(10+3*cos(phi))*cos(theta), (10+3*cos(phi))*sin(theta), 3*sin(phi)};
+			struct vector3 tempV = {(10+5*cos(phi))*cos(theta), (10+5*cos(phi))*sin(theta), 5*sin(phi)};
 			verticesArray[counter++] = tempV;
 		}
 	}
@@ -175,7 +175,7 @@ void createTorusVerticesArray(struct vector3 verticesArray[]){
 }
 
 void drawFrame(double z_buffer[HEIGHT][WIDTH], double minZ){
-	char palette[] = " @#1?;:+=-,._"; // ascii chars palette sorted from brightest to darkest
+	char palette[] = " @%#*+=-:."; // ascii chars palette sorted from brightest to darkest
 	char display[WIDTH*HEIGHT*2+HEIGHT+1] = "";
 	printf("\e[1;1H\e[2J"); // clears the console
 	int k = 0;
@@ -192,7 +192,7 @@ void drawFrame(double z_buffer[HEIGHT][WIDTH], double minZ){
 				lightChar = palette[lightIndex];
 			}
 			else{
-				lightChar = '_';
+				lightChar = '.';
 			}
 			if (z_buffer[i][j] == 0)
 				// z-value=0 means default value, i.e background
@@ -215,7 +215,7 @@ void resetZBuffer(double z_buffer[HEIGHT][WIDTH]){
 }
 
 int main(){
-	int size = 2000; // array size, larger to handle all points
+	int size = 3600; // array size, larger to handle all points
 	struct vector3 verticesArray[size];
 	// Uncomment next line for cube and change size
 	//createCubeVerticesArray(verticesArray);
@@ -228,9 +228,9 @@ int main(){
 	struct vector3 z = {0, 0, 1};
 
 	// rotation angles
-	double theta = 0.01;
-	double phi = 0.03;
-	double gamma = 0.02;
+	double theta = 0.025;
+	double phi = 0.02;
+	double gamma = 0.015;
 
 	double z_buffer[HEIGHT][WIDTH];
 	double minZ;
