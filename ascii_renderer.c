@@ -237,15 +237,6 @@ int main(){
 	
 	while (true){ // Ctrl+C to stop
 		updateAxis(&x, &y, &z, theta, phi, gamma);
-		if (theta > 2*pi){
-			theta -= pi*2;
-		}
-		if (phi > 2*pi){
-			phi -= 2*pi;
-		}
-		if (gamma > 2*pi){
-			gamma -= 2*pi;
-		}
 		resetZBuffer(z_buffer);
 		minZ = updateZBuffer(z_buffer, verticesArray, size, x, y, z, center);
 		drawFrame(z_buffer, minZ);
